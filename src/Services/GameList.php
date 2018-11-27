@@ -1,7 +1,7 @@
 <?php
-namespace sen\UserBehavior\Services;
+namespace wild\UserBehavior\Services;
 
-use sen\UserBehavior\Contracts\GameList;
+use wild\UserBehavior\Contracts\GameList;
 use Illuminate\Database\Eloquent\Model;
 
 class GameList extends Model implements GameList

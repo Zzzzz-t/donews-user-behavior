@@ -1,11 +1,11 @@
 <?php
-namespace sen\UserBehavior\Providers;
+namespace wild\UserBehavior\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use sen\UserBehavior\Contracts\GameList;
-use sen\UserBehavior\Contracts\UserScore;
-use sen\UserBehavior\Services\TestName;
-use sen\UserBehavior\Services\TestName;
+use wild\UserBehavior\Contracts\GameList;
+use wild\UserBehavior\Contracts\UserScore;
+use wild\UserBehavior\Services\TestName;
+use wild\UserBehavior\Services\TestName;
 
 class UserBehaviorProvider extends ServiceProvider
 {

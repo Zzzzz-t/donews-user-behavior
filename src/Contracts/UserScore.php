@@ -1,6 +1,6 @@
 <?php
 
-namespace sen\UserBehavior\Contracts;
+namespace wild\UserBehavior\Contracts;
 
 interface UserScore
 {

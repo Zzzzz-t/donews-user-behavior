@@ -1,7 +1,7 @@
 <?php
-namespace sen\UserBehavior\Services;
+namespace wild\UserBehavior\Services;
 
-use sen\UserBehavior\Contracts\UserScore;
+use wild\UserBehavior\Contracts\UserScore;
 use Illuminate\Database\Eloquent\Model;
 
 class UserScore extends Model implements UserScore

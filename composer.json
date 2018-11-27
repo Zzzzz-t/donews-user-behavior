@@ -1,5 +1,5 @@
 {
-    "name": "sen/donews-user-behavior",
+    "name": "wild/donews-user-behavior",
     "description": "model",
     "type": "library",
     "license": "MIT",
@@ -13,13 +13,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "sen\\UserBehavior\\Providers\\UserBehaviorProvider"
+                "wild\\UserBehavior\\Providers\\UserBehaviorProvider"
             ]
         }
     },    
     "autoload": {
         "psr-4": {
-            "sen\\UserBehavior\\": "src/"
+            "wild\\UserBehavior\\": "src/"
         }
     }
 }
