@@ -1,0 +1,25 @@
+{
+    "name": "sen/donews-user-behavior",
+    "description": "model",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tls",
+            "email": "1796058758@qq.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "sen\\UserBehavior\\Providers\\UserBehaviorProvider"
+            ]
+        }
+    },    
+    "autoload": {
+        "psr-4": {
+            "sen\\UserBehavior\\": "src/"
+        }
+    }
+}
