@@ -1,6 +1,6 @@
 {
     "name": "wild/donews-behavior",
-    "description": "model",
+    "description": "用户行为",
     "type": "library",
     "license": "MIT",
     "authors": [
