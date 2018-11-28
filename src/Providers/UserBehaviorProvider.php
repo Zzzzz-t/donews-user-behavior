@@ -4,8 +4,11 @@ namespace wild\UserBehavior\Providers;
 use Illuminate\Support\ServiceProvider;
 use wild\UserBehavior\Contracts\GameList;
 use wild\UserBehavior\Contracts\UserScore;
-use wild\UserBehavior\Services\TestName;
-use wild\UserBehavior\Services\TestName;
+use wild\UserBehavior\Contracts\GameListGames;
+
+use wild\UserBehavior\Services\GameListModel;
+use wild\UserBehavior\Services\UserScoreModel;
+use wild\UserBehavior\Services\GameListGamesModel;
 
 class UserBehaviorProvider extends ServiceProvider
 {
@@ -24,10 +27,13 @@ class UserBehaviorProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(GameList::class, function ($app) {
-            return new GameList();
+            return new GameListModel();
         });
         $this->app->singleton(UserScore::class, function ($app) {
-            return new UserScore();
+            return new UserScoreModel();
+        });
+        $this->app->singleton(GameListGames::class, function ($app) {
+            return new GameListGamesModel();
         });
     }
 
@@ -35,7 +41,8 @@ class UserBehaviorProvider extends ServiceProvider
     {
         return [
             GameList::class,
-            UserScore::class
+            UserScore::class,
+            GameListGames::class
         ];
     }
 
