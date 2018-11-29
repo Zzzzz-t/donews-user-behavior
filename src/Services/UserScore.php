@@ -3,6 +3,7 @@ namespace wild\UserBehavior\Services;
 
 use wild\UserBehavior\Contracts\UserScore;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class UserScoreModel extends Model implements UserScore
 {
