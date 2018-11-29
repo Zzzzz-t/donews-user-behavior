@@ -117,14 +117,14 @@ class GameListModel extends Model implements GameList
         foreach ($data as $val){
             $val->image;
             $val->games;
-            $val->game_total = GameListGames::where('l_id', $val->id)->where("app_name", $app_id)->count();
+            $val->game_total = GameListGamesModel::where('l_id', $val->id)->where("app_name", $app_id)->count();
         }
         return $data;
     }
 
     public function games()
     {
-        return $this->hasMany("wild\UserBehavior\Services\GameListGames", "l_id");
+        return $this->hasMany("wild\UserBehavior\Services\GameListGamesModel", "l_id");
     }
 }
 
