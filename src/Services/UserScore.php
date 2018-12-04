@@ -13,7 +13,7 @@ class UserScoreModel extends Model implements UserScore
 
     public static function addScore($gid, $user_id, $is_wanted, $is_played, $score, $content, $app_id)
     {
-        $result = self::where("g_id", $gid)->where("content", $content)->where("u_id", $user_id)->first();
+        $result = self::where("g_id", $gid)->where("app_name", $app_id)->where("u_id", $user_id)->first();
         //是否评分
         if (!$result) {
             $data['content'] = $content;
@@ -91,21 +91,21 @@ class UserScoreModel extends Model implements UserScore
     public static function most($app_id, $page, $pageSize, $key = 'power')
     {
         $forward = self::select('g_id', DB::raw('count(u_id) as total'))
-                ->where('is_played', 1)
+                ->where('is_wanted', 1)
                 ->where('created_at', '>', date('Y-m-d ' . '00:00:00', strtotime('-10 days')))
                 ->where("app_name", $app_id)
                 ->where("is_delete", 0)
                 ->groupby('g_id')
-                ->orderBy($key, 'desc')
+                ->orderBy('total', 'desc')
                 ->offset(($page-1)*$pageSize)->limit($pageSize)
                 ->get()->toArray();
 
         $most = self::select('g_id', DB::raw('count(u_id) as total'))
-                ->where('is_wanted', 1)
+                ->where('is_played', 1)
                 ->where("app_name", $app_id)
                 ->where("is_delete", 0)
                 ->groupby('g_id')
-                ->orderBy($key, 'desc')
+                ->orderBy('total', 'desc')
                 ->offset(($page-1)*$pageSize)->limit($pageSize)
                 ->get()->toArray();
 
