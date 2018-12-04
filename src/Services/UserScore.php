@@ -36,7 +36,7 @@ class UserScoreModel extends Model implements UserScore
 
     public static function getList($where, $id, $page, $page_size, $app_id, $key = 'power')
     {
-        $data = self::select('id as score_id', 'u_id as uid', 'content', 'score', 'created_at', 'power', 'g_id')
+        $data = self::select('id as score_id', 'u_id as uid', 'content', 'score', 'created_at', 'power', 'g_id', 'is_played')
             ->where('content', '<>', '')
             ->where('app_name', $app_id)
             ->where('g_id', $where, $id)
@@ -49,14 +49,14 @@ class UserScoreModel extends Model implements UserScore
 
     public static function getUserScore($app_id, $user_id, $page, $page_size, $key = 'created_at')
     {
-        $comment = self::select('id', 'u_id', 'g_id as game_id', 'score', 'content', 'created_at', 'power')->where("is_delete", 0)->where('u_id', $user_id)->orderBy($key,"desc")->offset(($page-1)*$page_size)->limit($page_size)->get()->toArray();
+        $comment = self::select('id', 'u_id', 'g_id as game_id', 'score', 'content', 'created_at', 'power', 'is_played')->where("is_delete", 0)->where('u_id', $user_id)->orderBy($key,"desc")->offset(($page-1)*$page_size)->limit($page_size)->get()->toArray();
 
         return $comment ?? [];
     }
 
     public static function detail($id)
     {
-        $comment = self::select('id', 'u_id as uid', 'content', 'score', 'created_at','g_id')
+        $comment = self::select('id', 'u_id as uid', 'content', 'score', 'created_at','g_id','is_played')
             ->where('id', $id)
             ->where("is_delete", 0)
             ->first();
