@@ -115,10 +115,13 @@ class UserScoreModel extends Model implements UserScore
         ];
     }
 
-    public static function updateScore($id, $is_wanted, $is_played, $score, $content, $app_id)
+    public static function updateScore($user_id, $id, $is_wanted, $is_played, $score, $content, $app_id)
     {
 
-        $obj = self::where("id", $id)->first();
+        $obj = self::where("id", $id)->where("u_id",$user_id)->where("app_name", $app_id)->first();
+        if(!$obj){
+            return 405;
+        }
 
         $data['content'] = $content;
         $data['is_wanted'] = $is_wanted;
