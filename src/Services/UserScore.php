@@ -114,6 +114,27 @@ class UserScoreModel extends Model implements UserScore
             'most' => $most
         ];
     }
+
+    public static function updateScore($id, $is_wanted, $is_played, $score, $content, $app_id)
+    {
+
+        $obj = self::where("id", $id)->first();
+
+        $data['content'] = $content;
+        $data['is_wanted'] = $is_wanted;
+        $data['is_played'] = $is_played;
+        $data['score'] = $score;
+        $data['updated_at'] = date('Y-m-d H:i:s');
+
+        self::where("id",$id)->update($data);
+
+        $comment = self::select('id', 'u_id as uid', 'content', 'score', 'created_at','g_id','is_played')
+            ->where('id', $id)
+            ->where("is_delete", 0)
+            ->first();
+
+        return $comment ?? [];
+    }
 }
 
 ?>
