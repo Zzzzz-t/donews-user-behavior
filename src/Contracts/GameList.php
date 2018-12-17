@@ -6,7 +6,7 @@ interface GameList
 {
     public static function getGameList($keyword, $page, $page_size, $type, $app_id);
 
-    public static function getUserList($user_id, $page, $page_size, $app_id);
+    public static function getUserList($user_id, $page, $page_size, $app_id, $sort, $sortfield);
 
     public static function create($app_id, $user_id, $title, $content, $is_public = 0, $path);
 

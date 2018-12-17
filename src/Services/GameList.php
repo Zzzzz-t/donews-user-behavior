@@ -29,7 +29,7 @@ class GameListModel extends Model implements GameList
     }
 
     //获取用户游戏单
-    public static function getUserList($user_id, $page, $page_size, $app_id)
+    public static function getUserList($user_id, $page, $page_size, $app_id, $sort = 'created_at', $sortfield = '')
     {
         $system = self::select('id')->where("app_name", $app_id)->where("status", 0)->where("uid", $user_id)->where("is_system", 1)->first();
         if(!$system){
@@ -45,7 +45,12 @@ class GameListModel extends Model implements GameList
             self::insert($insert);
         }
 
-        $data = self::select('id', 'uid', 'title', 'content', 'created_at')->where("app_name", $app_id)->where("status", 0)->where('uid', $user_id)->offset(($page - 1) * $page_size)->limit($page_size)->get();
+        $order = ''; 
+        if($sortfield){
+            $order = orderBy($sortfield, "DESC");
+        }
+
+        $data = self::select('id', 'uid', 'title', 'content', 'created_at', 'is_system')->where("app_name", $app_id)->where("status", 0)->where('uid', $user_id)->orderBy($sort, 'DESC')->offset(($page - 1) * $page_size)->limit($page_size)->get();
 
         return self::handle($data, $app_id);
     }

@@ -25,9 +25,9 @@ class UserScoreModel extends Model implements UserScore
             $data['app_name'] = $app_id;
             $data['created_at'] = date('Y-m-d H:i:s');
             $data['updated_at'] = date('Y-m-d H:i:s');
-            self::insert($data);
+            $id = self::insertGetId($data);
 
-            $id = DB::getPdo()->lastInsertId();
+            // $id = DB::getPdo()->lastInsertId();
             $data['id'] = $id;
             return $data;
         }
