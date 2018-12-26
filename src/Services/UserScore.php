@@ -7,9 +7,9 @@ use DB;
 
 class UserScoreModel extends Model implements UserScore
 {
-	protected $connection = "tgbus_users_behavior";
+    protected $connection = "tgbus_users_behavior";
 
-	protected $table = "user_scores";
+    protected $table = "user_scores";
 
     public static function addScore($gid, $user_id, $is_wanted, $is_played, $score, $content, $app_id)
     {
@@ -47,6 +47,17 @@ class UserScoreModel extends Model implements UserScore
         return $data;
     }
 
+    public static function getListCount($where, $id, $app_id)
+    {
+        $count = self::where('content', '<>', '')
+            ->where('app_name', $app_id)
+            ->where('g_id', $where, $id)
+            ->where("is_delete", 0)
+            ->count();
+
+        return $count;
+    }
+
     public static function getUserScore($app_id, $user_id, $page, $page_size, $key = 'created_at')
     {
         $comment = self::select('id', 'u_id', 'g_id as game_id', 'score', 'content', 'created_at', 'power', 'is_played')->where("is_delete", 0)->where('u_id', $user_id)->orderBy($key,"desc")->offset(($page-1)*$page_size)->limit($page_size)->get()->toArray();
@@ -77,9 +88,18 @@ class UserScoreModel extends Model implements UserScore
     {
         $score = [];
         foreach (json_decode($ids,1) as $key => $value) {
-            $score[$value] = round(self::where('g_id', $value)->where("is_delete", 0)->where("app_name", $app_id)->avg('score'), 1) ?? 0;
+            $score[$value] = round(self::where('g_id', $value)->where("is_delete", 0)->where("is_played", 1)->where("app_name", $app_id)->avg('score'), 1) ?? 0;
         }
         return $score;
+    }
+    
+    public static function scoreUserCount($ids, $app_id)
+    {
+        $count = [];
+        foreach (json_decode($ids,1) as $key => $value) {
+            $count[$value] = self::where('g_id', $value)->where("is_delete", 0)->where("app_name", $app_id)->count();
+        }
+        return $count;
     }
 
     public static function gameScore($id, $app_id, $page, $page_size, $key = 'power')
