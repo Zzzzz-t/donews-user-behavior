@@ -25,5 +25,7 @@ interface UserScore
 	public static function most($app_id, $page, $pageSize, $key = 'power');
 
 	public static function updateScore($user_id, $id, $is_wanted, $is_played, $score, $content, $app_id);
+
+	public static function getUserScoreInfo($user_id, $id);
 }
 ?>

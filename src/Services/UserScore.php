@@ -158,6 +158,11 @@ class UserScoreModel extends Model implements UserScore
 
         return $comment ?? [];
     }
+
+    public static function getUserScoreInfo($user_id, $id)
+    {
+        return self::where("id", $id)->where("u_id", $user_id)->get()->toArray() ?? [];
+    }
 }
 
 ?>
