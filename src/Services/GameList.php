@@ -4,6 +4,7 @@ namespace wild\UserBehavior\Services;
 use wild\UserBehavior\Contracts\GameList;
 use Illuminate\Database\Eloquent\Model;
 use wild\UserBehavior\Services\GameListImages;
+use DB;
 
 class GameListModel extends Model implements GameList
 {
@@ -67,9 +68,9 @@ class GameListModel extends Model implements GameList
         $insert['is_system'] = 0;
         $insert['created_at'] = date('Y-m-d H:i:s');
         $insert['updated_at'] = date('Y-m-d H:i:s');
-        self::insert($insert);
+        $id = self::insertGetId($insert);
 
-        $id = DB::getPdo()->lastInsertId();
+        // $id = DB::getPdo()->lastInsertId();
 
         if($path){
             $img['game_list_id'] = $id;
