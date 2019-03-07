@@ -24,7 +24,7 @@ class GameListModel extends Model implements GameList
         if ($type == 1) {
             $data = self::select('id', 'uid', 'title', 'content', 'created_at')->where("status", 0)->where("app_name", $app_id)->where('title', $keyword)->offset(($page - 1) * $page_size)->limit($page_size)->get();
         } else {
-            $data = self::select('id', 'uid', 'title', 'content', 'created_at')->where("status", 0)->where("app_name", $app_id)->orderBy("created_at", "desc")->offset(($page - 1) * $page_size)->limit($page_size)->get();
+            $data = self::select('id', 'uid', 'title', 'content', 'created_at')->where("status", 0)->where("is_system",0)->where("app_name", $app_id)->orderBy("created_at", "desc")->offset(($page - 1) * $page_size)->limit($page_size)->get();
         }
         return self::handle($data, $app_id);
     }
