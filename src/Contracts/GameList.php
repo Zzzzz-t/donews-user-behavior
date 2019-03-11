@@ -16,6 +16,7 @@ interface GameList
 
     public static function getDetails($app_id, $ids);
 
+	public static function isExistence($user_id, $id, $app_name)
 
 }
 ?>

@@ -110,6 +110,25 @@ class GameListModel extends Model implements GameList
         return true;
     }
 
+    //判断游戏是否在游戏单中
+    public static function isExistence($user_id, $id, $app_name)
+    {
+        $game_list = self::where("uid",$user_id)->where("app_name",$app_name)->get()->toArray();
+        $lists_id = array_column($game_list, 'id');
+
+        $games = GameListGamesModel::where("g_id",$id)->where("app_name",$app_name)->get()->toArray();
+        $games_id = array_column($games, 'l_id');
+
+        $data = array_intersect($lists_id,$games_id);
+
+        if($data){
+            return true;
+        }
+
+        return false;
+
+    }
+
     //获取游戏单详情
     public static function getDetails($app_id, $ids)
     {
