@@ -4,7 +4,7 @@ namespace wild\UserBehavior\Contracts;
 
 interface GameList
 {
-    public static function getGameList($keyword, $page, $page_size, $type, $app_id);
+    public static function getGameList($keyword, $page, $page_size, $type, $app_id, $sortfield, $order);
 
     public static function getUserList($user_id, $page, $page_size, $app_id, $sort, $sortfield);
 
