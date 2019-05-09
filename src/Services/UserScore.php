@@ -122,8 +122,10 @@ class UserScoreModel extends Model implements UserScore
 
         $most = self::select('g_id', DB::raw('count(u_id) as total'))
                 ->where('is_played', 1)
+                ->where('created_at', '>', date('Y-m-d ' . '00:00:00', strtotime('-10 days')))
                 ->where("app_name", $app_id)
                 ->where("is_delete", 0)
+                ->where('score', '>', 0)
                 ->groupby('g_id')
                 ->orderBy('total', 'desc')
                 ->offset(($page-1)*$pageSize)->limit($pageSize)
