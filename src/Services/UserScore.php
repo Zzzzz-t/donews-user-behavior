@@ -12,7 +12,7 @@ class UserScoreModel extends Model implements UserScore
 
     protected $table = "user_scores";
 
-    public static function addScore($gid, $user_id, $is_wanted, $is_played, $score, $content, $app_id)
+    public static function addScore($gid, $user_id, $is_wanted, $is_played, $score, $content, $app_id, $is_delete = 0)
     {
         $result = self::where("g_id", $gid)->where("app_name", $app_id)->where("u_id", $user_id)->first();
         //是否评分
@@ -24,6 +24,7 @@ class UserScoreModel extends Model implements UserScore
             $data['is_played'] = $is_played;
             $data['score'] = $score;
             $data['app_name'] = $app_id;
+            $data['is_delete'] = $is_delete;
             $data['created_at'] = date('Y-m-d H:i:s');
             $data['updated_at'] = date('Y-m-d H:i:s');
             $id = self::insertGetId($data);
